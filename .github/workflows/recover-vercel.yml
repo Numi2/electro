@@ -2,7 +2,6 @@ name: Verify Brosius Electro public website
 
 # The short production domain is public. Generated team/deployment URLs
 # can require Vercel Authentication and are not the customer-facing URL.
-# This check never deploys, changes protection, or accesses account credentials.
 on:
   workflow_dispatch:
   push:
@@ -24,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Verify the public page without authentication or redirects
+      - name: Verify redesigned production page without authentication or redirects
         env:
           SITE_URL: https://brosius-electro.vercel.app/
         shell: bash
@@ -32,22 +31,14 @@ jobs:
           set -euo pipefail
           html="$RUNNER_TEMP/brosius-electro.html"
           headers="$RUNNER_TEMP/brosius-electro.headers"
-          # --disable ignores any curl configuration. No -L, cookies,
-          # Authorization header, or deployment-protection bypass is used.
           status=$(curl --disable --silent --show-error --max-time 30 \
             --output "$html" --dump-header "$headers" \
             --write-out '%{http_code}' "$SITE_URL")
           echo "Anonymous public request: $SITE_URL -> HTTP $status"
-          if [[ "$status" != "200" ]]; then
-            echo '::error::The public website did not return HTTP 200 without redirects.'
-            exit 1
-          fi
+          [[ "$status" == "200" ]]
           grep -Eiq '^content-type: *text/html([;[:space:]]|$)' "$headers"
-          for expected in 'Brosius Electro' 'James Brosius' 'Gold Bar' 'Toggle energized night view'; do
-            if ! grep -Fq "$expected" "$html"; then
-              echo '::error::The response is not the expected Brosius Electro website.'
-              exit 1
-            fi
+          for expected in 'Brosius Electro' 'What we do.' 'Home base.' 'James Brosius' 'Toggle energized night view'; do
+            grep -Fq "$expected" "$html" || { echo "::error::Missing redesigned marker: $expected"; exit 1; }
           done
           echo "PUBLIC_VERIFIED=$SITE_URL"
-          printf '## Public website verified\n\n%s\n\nHTTP 200 with matching website HTML. No login, cookies, bypass token, or redirect following.\n' "$SITE_URL" >> "$GITHUB_STEP_SUMMARY"
+          printf '## Redesigned public website verified\n\n%s\n\nHTTP 200 with redesigned HTML, no login, cookies, bypass token, or redirect following.\n' "$SITE_URL" >> "$GITHUB_STEP_SUMMARY"
