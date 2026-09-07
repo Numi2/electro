@@ -2,39 +2,221 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#f1eee6" />
-  <meta name="description" content="Brosius Electro — electrician James Brosius serving Gold Bar, Washington and the Skykomish Valley." />
-  <title>Brosius Electro | Gold Bar, WA Electrician</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f2efe7" />
+  <meta name="description" content="Brosius Electro — electrical work by James Brosius in Gold Bar, Washington." />
+  <title>Brosius Electro | Gold Bar, WA</title>
   <style>
-    :root{--paper:#f1eee6;--ink:#15201d;--muted:#66706b;--line:#b9b6ac;--copper:#ad5d34;--amber:#efab38;--glow:rgba(239,171,56,.2);--panel:rgba(255,255,255,.38)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}a{color:inherit}button,a{font:inherit}.wrap{width:min(1180px,calc(100% - 40px));margin:auto}.mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;text-transform:uppercase;letter-spacing:.12em}.topline{position:fixed;z-index:20;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--copper) 0 28%,transparent 28% 31%,var(--copper) 31% 68%,transparent 68% 71%,var(--copper) 71%)}nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:28px 0}.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.mark{width:38px;height:38px}.brand b{font-size:15px;letter-spacing:.14em}.navlinks{display:flex;gap:28px;align-items:center}.navlinks a{text-decoration:none;font-size:13px;color:#33403b}.call{border:1px solid var(--ink);padding:11px 15px;transition:.2s}.call:hover{background:var(--ink);color:var(--paper)}
-    .hero{position:relative;min-height:760px;padding:80px 0 340px}.eyebrow{display:flex;align-items:center;gap:12px;font-size:11px}.eyebrow:before{content:"";width:46px;height:1px;background:var(--copper)}h1{font-size:clamp(62px,10vw,142px);line-height:.79;letter-spacing:-.065em;margin:34px 0 30px;font-weight:800;text-transform:uppercase;max-width:1050px}.stencil{position:relative}.stencil:after{content:"";position:absolute;left:31%;top:42%;width:7%;height:10%;background:var(--paper)}.lede{font-size:clamp(18px,2vw,25px);line-height:1.35;max-width:560px;color:#3f4945;margin:0 0 34px}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;gap:10px;align-items:center;text-decoration:none;padding:14px 18px;border:1px solid var(--ink);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.09em}.btn.primary{background:var(--ink);color:var(--paper)}.btn:hover{transform:translateY(-1px)}
-    .circuit{position:absolute;inset:auto 0 42px;height:350px;pointer-events:none}.circuit svg{width:100%;height:100%;overflow:visible}.trace{fill:none;stroke:#777d78;stroke-width:1.25;vector-effect:non-scaling-stroke}.trace.hot{stroke:var(--copper);stroke-width:1.6}.mount{fill:none;stroke:#39433f;stroke-width:1.35;vector-effect:non-scaling-stroke}.lamp{filter:drop-shadow(0 0 12px var(--amber))}.node{fill:var(--paper);stroke:#4d5752;stroke-width:1.3}.node.hot{fill:var(--amber);stroke:var(--copper)}.legend{position:absolute;right:max(20px,calc((100vw - 1180px)/2));bottom:265px;font-size:10px;color:#6c746f;writing-mode:vertical-rl;transform:rotate(180deg)}
-    .section{border-top:1px solid var(--line);padding:92px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}.label{font-size:11px;color:var(--copper);margin-bottom:18px}h2{font-size:clamp(38px,5vw,72px);line-height:.96;letter-spacing:-.045em;margin:0;text-transform:uppercase}.copy{font-size:18px;line-height:1.6;color:#48514d;max-width:560px}.services{margin-top:62px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.service{min-height:210px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px;position:relative}.service .n{font-size:10px;color:var(--copper)}.service h3{font-size:21px;margin:62px 0 8px;text-transform:uppercase;letter-spacing:-.02em}.service p{font-size:13px;line-height:1.5;color:#66706b;margin:0}.service:after{content:"";position:absolute;top:24px;right:24px;width:8px;height:8px;border:1px solid var(--ink);border-radius:50%}.service:hover:after{background:var(--amber);box-shadow:0 0 16px var(--amber)}
-    .territory{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid var(--line)}.territory-art{min-height:460px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.06))}.territory-art svg{position:absolute;width:110%;height:100%;left:-4%;bottom:-1%}.territory-copy{padding:42px;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}.territory-copy h3{font-size:38px;line-height:1;margin:0 0 20px;text-transform:uppercase}.towns{display:flex;flex-wrap:wrap;gap:8px}.pill{border:1px solid var(--line);padding:8px 10px;font-size:10px;background:rgba(255,255,255,.25)}
-    .contact{padding:120px 0 90px;position:relative}.contact h2{max-width:850px}.contact-row{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-top:50px}.contact-note{max-width:460px;color:#53605a;line-height:1.6}.contact-placeholder{font-size:clamp(18px,2.4vw,30px);font-weight:700;border-bottom:2px solid var(--copper);padding-bottom:5px}footer{border-top:1px solid var(--line);padding:24px 0 36px;font-size:10px;color:#6c746f}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    .switch{position:fixed;z-index:11;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;border:1px solid var(--ink);background:rgba(241,238,230,.82);backdrop-filter:blur(8px);display:grid;place-items:center;cursor:pointer}.switch svg{width:19px}.switch:hover{box-shadow:0 0 0 5px rgba(173,93,52,.08)}body.live{--paper:#131a18;--ink:#eef0e9;--muted:#9ea7a2;--line:#3f4743;--copper:#e28550;--panel:rgba(255,255,255,.05)}body.live .lede,body.live .copy,body.live .contact-note,body.live .service p,body.live .navlinks a{color:#aeb7b2}body.live .circuit .trace{stroke:#7a847f}body.live .circuit .mount{stroke:#d7dcd6}body.live .node{fill:#131a18;stroke:#a3aaa6}body.live .switch{background:rgba(19,26,24,.85)}
-    @media(max-width:760px){.wrap{width:min(100% - 28px,1180px)}.navlinks a:not(.call){display:none}.hero{padding-top:65px;min-height:700px}h1{font-size:clamp(62px,22vw,104px)}.grid,.territory{grid-template-columns:1fr;gap:38px}.services{grid-template-columns:1fr}.service{min-height:150px}.service h3{margin-top:35px}.territory-copy{border-left:0;border-top:1px solid var(--line)}.territory-art{min-height:330px}.contact-row{align-items:flex-start;flex-direction:column}.legend{display:none}}
-    @media(prefers-reduced-motion:no-preference){.trace.hot{stroke-dasharray:7 12;animation:flow 8s linear infinite}.node.hot{animation:pulse 2.4s ease-in-out infinite}@keyframes flow{to{stroke-dashoffset:-190}}@keyframes pulse{50%{filter:drop-shadow(0 0 7px var(--amber))}}}
+    :root{
+      --paper:#f2efe7;--ink:#131c19;--soft:#58625e;--line:#c8c4ba;
+      --copper:#b5643b;--amber:#efad3e;--glass:rgba(242,239,231,.88)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--paper)}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button,a{font:inherit}
+    .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;text-transform:uppercase;letter-spacing:.14em}
+    .shell{width:min(1180px,calc(100% - 32px));margin:auto}
+
+    header{position:sticky;top:0;z-index:30;background:linear-gradient(to bottom,var(--paper) 78%,rgba(242,239,231,0));padding-top:max(10px,env(safe-area-inset-top))}
+    nav{height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:11px;min-width:0}
+    .brand-mark{width:34px;height:34px;flex:0 0 auto}
+    .brand-name{font-size:12px;font-weight:800;white-space:nowrap}
+    .nav-cta{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 14px;border:1px solid var(--ink);font-size:10px;font-weight:800}
+
+    .hero{padding:54px 0 34px}
+    .kicker{display:flex;align-items:center;gap:10px;color:var(--copper);font-size:10px;font-weight:700}
+    .kicker::before{content:"";width:34px;height:1px;background:var(--copper)}
+    h1{margin:22px 0 18px;font-size:clamp(64px,18vw,146px);line-height:.78;letter-spacing:-.07em;text-transform:uppercase;font-weight:900;max-width:980px}
+    .word{display:block;position:relative;width:max-content;max-width:100%}
+    .word.cut::after{content:"";position:absolute;left:28%;top:42%;width:9%;height:10%;background:var(--paper)}
+    .hero-meta{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-top:30px}
+    .hero-sub{margin:0;max-width:470px;color:var(--soft);font-size:clamp(16px,2vw,22px);line-height:1.35;font-weight:650}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 18px;border:1px solid var(--ink);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;transition:.2s ease}
+    .btn.primary{background:var(--ink);color:var(--paper)}
+    .btn:hover{transform:translateY(-1px)}
+
+    .artboard{margin-top:44px;height:310px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,0))}
+    .artboard svg{position:absolute;inset:0;width:100%;height:100%}
+    .mountain{fill:none;stroke:var(--ink);stroke-width:1.3;vector-effect:non-scaling-stroke}
+    .wire{fill:none;stroke:#77807b;stroke-width:1;vector-effect:non-scaling-stroke}
+    .wire.hot{stroke:var(--copper);stroke-width:1.5;stroke-dasharray:8 12}
+    .node{fill:var(--paper);stroke:var(--ink);stroke-width:1.1}
+    .node.hot{fill:var(--amber);stroke:var(--copper)}
+    .art-label{position:absolute;left:18px;bottom:16px;font-size:9px;color:var(--soft)}
+    .art-badge{position:absolute;right:18px;top:16px;border:1px solid var(--line);padding:7px 9px;font-size:9px;background:var(--glass)}
+
+    .section{padding:84px 0}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:28px;margin-bottom:34px}
+    .section-no{font-size:10px;color:var(--copper)}
+    h2{font-size:clamp(40px,6vw,78px);line-height:.9;letter-spacing:-.05em;text-transform:uppercase;margin:8px 0 0}
+    .micro{font-size:13px;color:var(--soft);max-width:320px;line-height:1.45;margin:0}
+
+    .service-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+    .service{min-height:188px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px;display:flex;flex-direction:column;justify-content:space-between;transition:.2s ease;background:rgba(255,255,255,.1)}
+    .service:hover{background:rgba(255,255,255,.4)}
+    .service-index{font-size:9px;color:var(--copper)}
+    .service h3{font-size:18px;line-height:1.05;margin:0;text-transform:uppercase;letter-spacing:-.02em}
+    .spark{width:10px;height:10px;border:1px solid var(--ink);border-radius:50%}
+    .service:hover .spark{background:var(--amber);border-color:var(--copper);box-shadow:0 0 18px var(--amber)}
+
+    .local{display:grid;grid-template-columns:1.05fr .95fr;border:1px solid var(--line);min-height:390px}
+    .local-art{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,0))}
+    .local-art svg{position:absolute;inset:0;width:100%;height:100%}
+    .local-copy{padding:38px;border-left:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
+    .local-copy h3{font-size:clamp(40px,5vw,64px);line-height:.9;letter-spacing:-.05em;text-transform:uppercase;margin:0}
+    .towns{display:flex;flex-wrap:wrap;gap:7px;margin-top:32px}
+    .pill{border:1px solid var(--line);padding:8px 10px;font-size:9px;background:rgba(255,255,255,.18)}
+
+    .contact{padding:94px 0 110px;border-top:1px solid var(--line)}
+    .contact-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+    .contact h2{margin-top:10px}
+    .contact-name{font-size:14px;color:var(--soft);margin-top:24px}
+    .contact-placeholder{font-size:14px;font-weight:800;border-bottom:2px solid var(--copper);padding-bottom:6px;white-space:nowrap}
+
+    footer{border-top:1px solid var(--line);padding:20px 0 calc(28px + env(safe-area-inset-bottom));font-size:9px;color:var(--soft)}
+    .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+    .mode{position:fixed;z-index:25;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));width:46px;height:46px;border-radius:50%;border:1px solid var(--ink);background:var(--glass);backdrop-filter:blur(12px);display:grid;place-items:center;cursor:pointer}
+    .mode svg{width:18px}
+
+    body.live{--paper:#111816;--ink:#eff1ea;--soft:#a8b0ac;--line:#3f4945;--copper:#e28a54;--glass:rgba(17,24,22,.9)}
+    body.live .service{background:rgba(255,255,255,.02)}
+    body.live .service:hover{background:rgba(255,255,255,.06)}
+    body.live .artboard,body.live .local-art{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,0))}
+
+    @media(max-width:820px){
+      .shell{width:min(100% - 28px,1180px)}
+      header{position:relative;background:var(--paper)}
+      nav{height:66px}
+      .brand-mark{width:30px;height:30px}
+      .brand-name{font-size:10px;letter-spacing:.11em}
+      .nav-cta{min-height:38px;padding:0 11px;font-size:9px}
+
+      .hero{padding:42px 0 22px}
+      .kicker{font-size:9px}
+      h1{font-size:clamp(72px,21vw,112px);line-height:.79;margin:20px 0 0}
+      .hero-meta{display:block;margin-top:30px}
+      .hero-sub{font-size:17px;max-width:310px;line-height:1.35}
+      .actions{margin-top:24px;display:grid;grid-template-columns:1fr 1fr}
+      .btn{min-height:52px;padding:0 10px}
+
+      .artboard{height:250px;margin-top:34px}
+      .art-label{left:12px;bottom:12px;font-size:8px}
+      .art-badge{right:12px;top:12px;font-size:8px}
+
+      .section{padding:70px 0}
+      .section-head{display:block;margin-bottom:26px}
+      .micro{margin-top:18px;font-size:13px;max-width:280px}
+      h2{font-size:clamp(46px,14vw,68px)}
+
+      .service-grid{grid-template-columns:1fr 1fr}
+      .service{min-height:146px;padding:16px}
+      .service h3{font-size:16px}
+
+      .local{grid-template-columns:1fr;min-height:0}
+      .local-art{height:260px}
+      .local-copy{border-left:0;border-top:1px solid var(--line);padding:28px 20px}
+      .local-copy h3{font-size:48px}
+
+      .contact{padding:72px 0 92px}
+      .contact-grid{grid-template-columns:1fr;gap:28px}
+      .contact-placeholder{justify-self:start;white-space:normal}
+      .mode{width:44px;height:44px;right:14px}
+    }
+
+    @media(max-width:390px){
+      h1{font-size:20vw}
+      .actions{grid-template-columns:1fr}
+      .service-grid{grid-template-columns:1fr}
+      .service{min-height:120px}
+    }
+
+    @media(prefers-reduced-motion:no-preference){
+      .wire.hot{animation:flow 8s linear infinite}.node.hot{animation:pulse 2.2s ease-in-out infinite}
+      @keyframes flow{to{stroke-dashoffset:-180}}
+      @keyframes pulse{50%{filter:drop-shadow(0 0 7px var(--amber))}}
+    }
   </style>
 </head>
 <body>
-  <div class="topline"></div>
-  <div class="wrap"><nav aria-label="Main navigation">
-    <a class="brand" href="#top" aria-label="Brosius Electro home"><svg class="mark" viewBox="0 0 52 52" aria-hidden="true"><path d="M5 38V26L18 10l8 10 8-10 13 16v12M12 38V28l6-7 8 10 8-7 6 4v10M5 43h17V31m8 12h17" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="26" cy="43" r="4" fill="#ad5d34"/></svg><b class="mono">Brosius Electro</b></a>
-    <div class="navlinks"><a href="#services">Services</a><a href="#area">Service Area</a><a class="call mono" href="#contact">Get in touch</a></div>
-  </nav></div>
-  <main id="top">
-    <section class="hero wrap"><div class="eyebrow mono">Gold Bar, Washington · Electrical</div><h1><span class="stencil">Power</span><br/>done right.</h1><p class="lede">Straightforward electrical work for homes and small businesses across Gold Bar and the Skykomish Valley.</p><div class="actions"><a class="btn primary" href="#contact">Contact James <span>↗</span></a><a class="btn" href="#services">View services</a></div></section>
-    <div class="legend mono">120V · 240V · residential · service</div>
-    <div class="circuit" aria-hidden="true"><svg viewBox="0 0 1440 350" preserveAspectRatio="none"><path class="mount" d="M0 266L132 205l95 39 110-88 93 63 91-113 88 86 112-126 84 105 79-55 103 92 98-66 94 76 111-49 70 34"/><path class="trace" d="M0 310H210v-38h105v50h208v-76h164v53h188v-94h190v63h175v-27h200"/><path class="trace hot" d="M0 326h167v-31h126v31h172v-53h151v53h250v-82h151v82h218v-40h205"/><path class="trace" d="M315 272v-70h101v-35M875 205v-47h83v-54M1240 241v-55h78v-59"/><circle class="node" cx="315" cy="272" r="5"/><circle class="node hot" cx="616" cy="326" r="5"/><circle class="node" cx="875" cy="205" r="5"/><circle class="node hot" cx="1017" cy="326" r="5"/><circle class="node" cx="1240" cy="241" r="5"/><g class="lamp"><circle cx="958" cy="103" r="6" fill="#efab38"/><path d="M958 92v-18m-20 8 9 9m31-9-9 9" stroke="#efab38" stroke-width="1.3"/></g></svg></div>
-    <section class="section" id="services"><div class="wrap"><div class="grid"><div><div class="label mono">01 / Services</div><h2>Clean work.<br/>Clear answers.</h2></div><div class="copy">From troubleshooting a dead circuit to adding new lighting or updating a panel, Brosius Electro focuses on safe, code-conscious work and direct communication.</div></div><div class="services"><article class="service"><div class="n mono">01</div><h3>Repairs & troubleshooting</h3><p>Fault finding, outlets, switches, breakers, lighting and electrical issues.</p></article><article class="service"><div class="n mono">02</div><h3>Installations</h3><p>Fixtures, receptacles, dedicated circuits, appliances and electrical additions.</p></article><article class="service"><div class="n mono">03</div><h3>Panels & service</h3><p>Panel work, circuit changes and service-related electrical improvements.</p></article><article class="service"><div class="n mono">04</div><h3>Lighting</h3><p>Interior, exterior, shop and utility lighting installation and repair.</p></article><article class="service"><div class="n mono">05</div><h3>Remodel electrical</h3><p>Practical electrical work for renovations, additions and room changes.</p></article><article class="service"><div class="n mono">06</div><h3>Small commercial</h3><p>Electrical service for local shops, workspaces and small business properties.</p></article></div></div></section>
-    <section class="section" id="area"><div class="wrap"><div class="territory"><div class="territory-art" aria-hidden="true"><svg viewBox="0 0 700 450" preserveAspectRatio="none"><path d="M0 368L80 303l71 35 74-81 51 38 69-125 72 101 57-60 63 74 67-43 96 100" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M0 395h124v-28h117v28h159v-48h132v48h168" fill="none" stroke="#ad5d34" stroke-width="1.5" stroke-dasharray="7 10"/><circle cx="400" cy="347" r="7" fill="#efab38"/><circle cx="400" cy="347" r="15" fill="none" stroke="#efab38" opacity=".35"/><text x="421" y="351" font-family="monospace" font-size="11" letter-spacing="2" fill="currentColor">GOLD BAR</text></svg></div><div class="territory-copy"><div><div class="label mono">02 / Local</div><h3>Based in<br/>Gold Bar.</h3><p class="copy" style="font-size:16px">Local electrical service centered in Gold Bar, Washington, with practical coverage through nearby Skykomish Valley communities.</p></div><div class="towns"><span class="pill mono">Gold Bar</span><span class="pill mono">Sultan</span><span class="pill mono">Index</span><span class="pill mono">Skykomish Valley</span></div></div></div></div></section>
-    <section class="contact" id="contact"><div class="wrap"><div class="label mono">03 / Contact</div><h2>Need electrical work?<br/>Talk to James.</h2><div class="contact-row"><p class="contact-note">James Brosius · Brosius Electro<br/>Gold Bar, Washington<br/><br/>For estimates, scheduling, and service questions, contact James directly.</p><div class="contact-placeholder">Phone / email to be added</div></div></div></section>
-  </main>
-  <footer><div class="wrap foot"><span class="mono">Brosius Electro · Gold Bar WA</span><span class="mono">Electrical · James Brosius</span><span>© <span id="year"></span></span></div></footer>
-  <button class="switch" id="switch" aria-label="Toggle energized night view" title="Energize"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 6 13h5l-1 9 8-12h-5z"/></svg></button>
-  <script>document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('switch').addEventListener('click',()=>document.body.classList.toggle('live'));</script>
+<header>
+  <div class="shell">
+    <nav aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="Brosius Electro home">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 35V24L16 9l8 9 8-9 12 15v11M10 35V27l6-7 8 9 8-6 6 4v8M4 40h16V29m8 11h16" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="24" cy="40" r="3.5" fill="#b5643b"/></svg>
+        <span class="brand-name mono">Brosius Electro</span>
+      </a>
+      <a class="nav-cta mono" href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero shell">
+    <div class="kicker mono">Gold Bar · Washington</div>
+    <h1><span class="word cut">Power</span><span class="word">Done</span><span class="word">Right.</span></h1>
+    <div class="hero-meta">
+      <p class="hero-sub">Electrical work for homes, shops and local businesses.</p>
+      <div class="actions"><a class="btn primary" href="#contact">James Brosius ↗</a><a class="btn" href="#services">Services</a></div>
+    </div>
+  </section>
+
+  <div class="artboard" aria-hidden="true">
+    <svg viewBox="0 0 1440 310" preserveAspectRatio="none">
+      <path class="mountain" d="M0 248L118 170l83 38 104-102 89 78 86-131 94 98 104-120 82 92 106-72 96 91 111-64 92 92 96-54 109 70"/>
+      <path class="wire" d="M0 278H178v-44h138v44h190v-70h165v70h235v-96h170v96h170v-48h194"/>
+      <path class="wire hot" d="M0 294h135v-28h123v28h217v-45h148v45h225v-64h174v64h238v-36h180"/>
+      <circle class="node" cx="316" cy="234" r="5"/><circle class="node hot" cx="623" cy="294" r="5"/><circle class="node" cx="906" cy="182" r="5"/><circle class="node hot" cx="1197" cy="294" r="5"/>
+    </svg>
+    <div class="art-badge mono">120 / 240 V</div>
+    <div class="art-label mono">Skykomish Valley · Electrical</div>
+  </div>
+
+  <section class="section" id="services">
+    <div class="shell">
+      <div class="section-head">
+        <div><div class="section-no mono">01 · Services</div><h2>What we do.</h2></div>
+        <p class="micro">Practical electrical work. Clear scope. Clean finish.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service"><div class="service-index mono">01</div><div class="spark"></div><h3>Repair</h3></article>
+        <article class="service"><div class="service-index mono">02</div><div class="spark"></div><h3>Install</h3></article>
+        <article class="service"><div class="service-index mono">03</div><div class="spark"></div><h3>Panels</h3></article>
+        <article class="service"><div class="service-index mono">04</div><div class="spark"></div><h3>Lighting</h3></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="area">
+    <div class="shell local">
+      <div class="local-art" aria-hidden="true">
+        <svg viewBox="0 0 700 390" preserveAspectRatio="none">
+          <path class="mountain" d="M0 320L72 274l70 34 86-83 58 49 74-132 73 93 72-71 64 79 67-46 64 55"/>
+          <path class="wire hot" d="M0 352h118v-25h110v25h146v-54h138v54h188"/>
+          <circle class="node hot" cx="374" cy="298" r="7"/><circle cx="374" cy="298" r="16" fill="none" stroke="#efad3e" opacity=".35"/>
+        </svg>
+      </div>
+      <div class="local-copy">
+        <div><div class="section-no mono">02 · Local</div><h3>Gold Bar.<br/>Home base.</h3></div>
+        <div class="towns"><span class="pill mono">Gold Bar</span><span class="pill mono">Sultan</span><span class="pill mono">Index</span><span class="pill mono">Skykomish</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="shell contact-grid">
+      <div><div class="section-no mono">03 · Contact</div><h2>Talk to James.</h2><div class="contact-name">James Brosius · Gold Bar, WA</div></div>
+      <div class="contact-placeholder">Phone / email to be added</div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="shell foot"><span class="mono">Brosius Electro</span><span>© <span id="year"></span></span></div></footer>
+<button class="mode" id="mode" aria-label="Toggle energized night view" title="Energize"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 6 13h5l-1 9 8-12h-5z"/></svg></button>
+<script>document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('mode').addEventListener('click',()=>document.body.classList.toggle('live'));</script>
 </body>
 </html>
