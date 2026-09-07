@@ -1,146 +1,53 @@
-name: Recover Brosius Electro public deployment
+name: Verify Brosius Electro public website
 
-# One-time recovery. Editing website files does not create anonymous deployments.
+# The short production domain is public. Generated team/deployment URLs
+# can require Vercel Authentication and are not the customer-facing URL.
+# This check never deploys, changes protection, or accesses account credentials.
 on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['.github/workflows/recover-vercel.yml']
+    paths:
+      - index.html
+      - vercel.json
+      - .github/workflows/recover-vercel.yml
 
-permissions:
-  contents: read
+permissions: {}
 
 concurrency:
-  group: brosius-electro-recovery
-  cancel-in-progress: false
+  group: brosius-electro-public-check
+  cancel-in-progress: true
 
 jobs:
-  recover:
+  verify:
     if: github.repository == 'Numi2/electro' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 2
     steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Deploy and verify without Vercel login
+      - name: Verify the public page without authentication or redirects
         env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          SITE_URL: https://brosius-electro.vercel.app/
         shell: bash
         run: |
-          node <<'NODE'
-          'use strict';
-          // Recovery is scoped to this public static website. Never upload repository secrets.
-          const fs = require('node:fs');
-          const path = require('node:path');
-          const crypto = require('node:crypto');
-          const { execFileSync } = require('node:child_process');
-          const PUBLIC_KEY = "-----BEGIN PUBLIC KEY-----\nMIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEAwV8PwcCctIaGIW/+7BBp\nQCJlpi+fJkijqD7PkNRwKwwGLZ2GAHJXnwgvAbZlDuKm34FgWoUQkXxyGh/99ZmV\nZ2gPyh1Si7pWlvWHKf444omY5cxwRLdR/cSaACKtuQ2a0GcmQ6UHDPcX2Qpr5RJx\nOvTHPs+skwzuB/EKZpfZPJ9hOsEhT77tQZusxc983nqSb0erf9nYJxbkzNJkzs1G\n0keY8ORbp49Qk+U9hsPAAoAcqDhiHRX7eXUPJRbM9/fX4C9t1jrErxpZ+i6YJwJW\noRSqv36URLM2J/IvTHHAKbRe7qz5ZJj3D08xP4Q8+l73n1UyEck48N5/S+pt3gae\norywZZ88Wvm31drYDLPp43GcxfVjdD78XI7T2xXrbrRIl5aNpbo51SDHLa5X7TYR\nZqbWkebRzeDETOJM+uG/ciY1IsJ1Pi/hB1MMDSpRsn6BTNpJgkceqAMkYEunoCsJ\nzQm5n+aR/mMgm0dbMzDjeqct7xQt9OVNMYKoNP0NDJMjAgMBAAE=\n-----END PUBLIC KEY-----\n";
-          const TEAM = 'team_WpkOgLYKw471gX4gUbT7ACLH';
-          const PROJECT = 'brosius-electro';
-          const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-          function siteURL(value) {
-            const u = new URL(value);
-            if (u.protocol !== 'https:' || !u.hostname.endsWith('.vercel.app') || u.username || u.password || u.port) throw new Error('Unexpected deployment URL');
-            return u.origin + '/';
-          }
-          async function probe(value) {
-            const url = siteURL(value);
-            try {
-              // No Authorization header, no cookies, no protection-bypass token, no login redirects.
-              const response = await fetch(url, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
-              const html = await response.text();
-              const ok = response.status === 200 && /text\/html/i.test(response.headers.get('content-type') || '') && html.includes('Brosius Electro') && html.includes('James Brosius') && html.includes('Gold Bar') && html.includes('Toggle energized night view');
-              return { url, status: response.status, ok };
-            } catch { return { url, status: 'network-error', ok: false }; }
-          }
-          function report(result) {
-            // A claim URL conveys management rights. Encrypt it rather than expose it in public Actions logs.
-            const key = crypto.randomBytes(32);
-            const iv = crypto.randomBytes(12);
-            const cipher = crypto.createCipheriv('aes-256-gcm', key, iv);
-            const data = Buffer.concat([cipher.update(JSON.stringify(result), 'utf8'), cipher.final()]);
-            const envelope = {
-              key: crypto.publicEncrypt({ key: PUBLIC_KEY, oaepHash: 'sha256' }, key).toString('base64'),
-              iv: iv.toString('base64'), tag: cipher.getAuthTag().toString('base64'), data: data.toString('base64')
-            };
-            console.log('SEALED_RESULT=' + Buffer.from(JSON.stringify(envelope)).toString('base64'));
-            if (result.publicVerified) {
-              console.log('PUBLIC_VERIFIED=' + result.url);
-              fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## Brosius Electro\n\nPublic site: ${result.url}\n\nVerified HTTP 200 with matching website HTML, without credentials or redirect following.\n\nDeployment mode: ${result.mode}.\n`);
-            }
-          }
-          async function waitPublic(url) {
-            for (let attempt = 0; attempt < 48; attempt++) {
-              const check = await probe(url);
-              if (check.ok) return check;
-              if (check.status === 401 || check.status === 403 || [301,302,303,307,308].includes(check.status)) throw new Error('Deployment requires authentication or redirects; not public');
-              if (attempt % 6 === 0) console.log(`Public check attempt ${attempt + 1}: HTTP ${check.status}`);
-              await sleep(5000);
-            }
-            throw new Error('Public access verification did not succeed');
-          }
-          async function api(resource, method = 'GET', body) {
-            const url = `https://api.vercel.com${resource}${resource.includes('?') ? '&' : '?'}teamId=${TEAM}`;
-            const response = await fetch(url, { method, headers: { Authorization: `Bearer ${process.env.VERCEL_TOKEN}`, 'Content-Type':'application/json' }, body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(30000) });
-            if (!response.ok) {
-              const error = new Error(`Vercel API ${method} ${resource}: HTTP ${response.status}`);
-              error.status = response.status; throw error;
-            }
-            return response.json();
-          }
-          async function main() {
-            const checks = await Promise.all([
-              'https://brosius-electro.vercel.app',
-              'https://brosius-electro-goldbar.vercel.app',
-              'https://brosius-electro-numi2s-projects.vercel.app',
-              'https://brosius-electro-gh58pk8jo-numi2s-projects.vercel.app'
-            ].map(probe));
-            for (const check of checks) console.log(`Existing site check: ${check.url} -> ${check.status}; matching=${check.ok}`);
-            const existing = checks.find(check => check.ok);
-            if (existing) { report({ mode: 'existing-deployment', url: existing.url, publicVerified: true, sourceCommit: process.env.GITHUB_SHA }); return; }
-            const staging = path.join(process.env.RUNNER_TEMP, PROJECT);
-            fs.mkdirSync(staging, { recursive: true });
-            for (const name of ['index.html', 'vercel.json']) fs.copyFileSync(path.join(process.env.GITHUB_WORKSPACE, name), path.join(staging, name));
-            if (process.env.VERCEL_TOKEN) {
-              console.log('Using repository-configured Vercel credentials for CLI production deployment.');
-              execFileSync('npm', ['install', '--global', 'vercel', '--no-audit', '--no-fund'], { stdio: 'inherit', timeout: 180000 });
-              let project;
-              try { project = await api(`/v9/projects/${PROJECT}`); }
-              catch (error) { if (error.status !== 404) throw error; project = await api('/v11/projects', 'POST', { name: PROJECT, framework: null }); }
-              // Only this marketing site is made public; no other project or team settings are changed.
-              await api(`/v9/projects/${project.id}`, 'PATCH', { ssoProtection: null, passwordProtection: null });
-              fs.mkdirSync(path.join(staging, '.vercel'), { recursive: true });
-              fs.writeFileSync(path.join(staging, '.vercel/project.json'), JSON.stringify({ orgId: TEAM, projectId: project.id, projectName: PROJECT }));
-              const stdout = execFileSync('vercel', ['--prod', '--yes', '--scope', 'numi2s-projects', '--token', process.env.VERCEL_TOKEN], { cwd: staging, encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'], timeout: 360000 });
-              const urls = stdout.match(/https:\/\/[a-zA-Z0-9.-]+\.vercel\.app\b/g);
-              if (!urls || !urls.length) throw new Error('CLI did not return a deployment URL');
-              const url = siteURL(urls.at(-1));
-              await waitPublic(url);
-              report({ mode: 'cli-production', target: 'production', url, projectId: project.id, publicVerified: true, sourceCommit: process.env.GITHUB_SHA });
-              return;
-            }
-            console.log('No VERCEL_TOKEN is configured for this repository. Using the Vercel-maintained claimable deployment endpoint for public access. This is not yet an account-owned production deployment.');
-            // Endpoint documented by vercel-labs/agent-skills, skills/deploy-to-vercel/resources/deploy.sh.
-            const archive = path.join(process.env.RUNNER_TEMP, 'brosius-electro.tgz');
-            execFileSync('tar', ['-czf', archive, '-C', staging, 'index.html', 'vercel.json']);
-            const form = new FormData();
-            form.append('file', new Blob([fs.readFileSync(archive)], { type: 'application/gzip' }), 'brosius-electro.tgz');
-            form.append('framework', 'null');
-            const response = await fetch('https://claude-skills-deploy.vercel.com/api/deploy', { method: 'POST', body: form, signal: AbortSignal.timeout(180000) });
-            if (!response.ok) throw new Error(`Claimable deployment endpoint: HTTP ${response.status}`);
-            const result = await response.json();
-            if (result.error || !result.previewUrl || !result.claimUrl) throw new Error('Claimable deployment did not return the required URLs');
-            const claim = new URL(result.claimUrl);
-            if (claim.protocol !== 'https:' || claim.hostname !== 'vercel.com') throw new Error('Unexpected claim URL host');
-            const url = siteURL(result.previewUrl);
-            // Preserve ownership recovery data even if the initial public-access check fails.
-            report({ ...result, mode: 'claimable', url, publicVerified: false, sourceCommit: process.env.GITHUB_SHA });
-            await waitPublic(url);
-            report({ ...result, mode: 'claimable', url, publicVerified: true, sourceCommit: process.env.GITHUB_SHA });
-          }
-          main().catch(error => { console.error('DEPLOYMENT_FAILED: ' + error.message); process.exitCode = 1; });
-          NODE
+          set -euo pipefail
+          html="$RUNNER_TEMP/brosius-electro.html"
+          headers="$RUNNER_TEMP/brosius-electro.headers"
+          # --disable ignores any curl configuration. No -L, cookies,
+          # Authorization header, or deployment-protection bypass is used.
+          status=$(curl --disable --silent --show-error --max-time 30 \
+            --output "$html" --dump-header "$headers" \
+            --write-out '%{http_code}' "$SITE_URL")
+          echo "Anonymous public request: $SITE_URL -> HTTP $status"
+          if [[ "$status" != "200" ]]; then
+            echo '::error::The public website did not return HTTP 200 without redirects.'
+            exit 1
+          fi
+          grep -Eiq '^content-type: *text/html([;[:space:]]|$)' "$headers"
+          for expected in 'Brosius Electro' 'James Brosius' 'Gold Bar' 'Toggle energized night view'; do
+            if ! grep -Fq "$expected" "$html"; then
+              echo '::error::The response is not the expected Brosius Electro website.'
+              exit 1
+            fi
+          done
+          echo "PUBLIC_VERIFIED=$SITE_URL"
+          printf '## Public website verified\n\n%s\n\nHTTP 200 with matching website HTML. No login, cookies, bypass token, or redirect following.\n' "$SITE_URL" >> "$GITHUB_STEP_SUMMARY"
